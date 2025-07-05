@@ -17,9 +17,13 @@ public class ResultadosInterfaz extends javax.swing.JFrame {
      * Creates new form ResultadosInterfaz
      */
    
-    
-    public ResultadosInterfaz() {
+    public static HashTable tabla;
+    public static String resultado;
+    public ResultadosInterfaz(HashTable tabla, String resultado) {
         initComponents();
+        this.tabla= tabla;
+        this.resultado = resultado;
+        respuesta.setText(resultado);
     }
 
     /**
@@ -34,7 +38,7 @@ public class ResultadosInterfaz extends javax.swing.JFrame {
         textArea1 = new java.awt.TextArea();
         jPanel1 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
-        textArea2 = new java.awt.TextArea();
+        respuesta = new java.awt.TextArea();
         Regresar = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,7 +52,7 @@ public class ResultadosInterfaz extends javax.swing.JFrame {
         label1.setForeground(new java.awt.Color(255, 255, 255));
         label1.setText("Resultado");
         jPanel1.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
-        jPanel1.add(textArea2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 300, 200));
+        jPanel1.add(respuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 300, 200));
 
         Regresar.setLabel("Regresar");
         Regresar.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +73,7 @@ public class ResultadosInterfaz extends javax.swing.JFrame {
         this.setVisible(false);
         
         
-        SegundaInterfaz segunda = new SegundaInterfaz();
+        SegundaInterfaz segunda = new SegundaInterfaz(tabla);
         segunda.setVisible(true);
         segunda.setLocationRelativeTo(null);
         
@@ -107,7 +111,7 @@ public class ResultadosInterfaz extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ResultadosInterfaz().setVisible(true);
+                new ResultadosInterfaz(tabla, resultado).setVisible(true);
             }
         });
     }
@@ -116,7 +120,7 @@ public class ResultadosInterfaz extends javax.swing.JFrame {
     private java.awt.Button Regresar;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
+    private java.awt.TextArea respuesta;
     private java.awt.TextArea textArea1;
-    private java.awt.TextArea textArea2;
     // End of variables declaration//GEN-END:variables
 }

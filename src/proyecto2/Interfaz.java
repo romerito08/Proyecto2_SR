@@ -138,7 +138,7 @@ public class Interfaz extends javax.swing.JFrame {
             
         }
         
-        SegundaInterfaz SI = new SegundaInterfaz();
+        SegundaInterfaz SI = new SegundaInterfaz(tabla);
         SI.setVisible(true);
         SI.setLocationRelativeTo(null);
         this.setVisible(false);

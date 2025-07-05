@@ -15,9 +15,11 @@ public class SegundaInterfaz extends javax.swing.JFrame {
      * Creates new form SegundaInterfaz
      */
     
-    
-    public SegundaInterfaz() {
+    public static HashTable tabla;
+    public static String respuesta;
+    public SegundaInterfaz(HashTable tabla) {
         initComponents();
+        this.tabla =tabla;
     }
 
     /**
@@ -127,7 +129,8 @@ public class SegundaInterfaz extends javax.swing.JFrame {
     private void BuscarPatronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarPatronActionPerformed
         // TODO add your handling code here:
         
-        ResultadosInterfaz resultado = new ResultadosInterfaz();
+        
+        ResultadosInterfaz resultado = new ResultadosInterfaz(tabla, respuesta);
         resultado.setVisible(true);
         resultado.setLocationRelativeTo(null);
         this.setVisible(false);
@@ -136,7 +139,7 @@ public class SegundaInterfaz extends javax.swing.JFrame {
     private void ReporteColisionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteColisionesActionPerformed
 
         // TODO add your handling code here:
-        ResultadosInterfaz resultado = new ResultadosInterfaz();
+        ResultadosInterfaz resultado = new ResultadosInterfaz(tabla, respuesta);
         resultado.setVisible(true);
         resultado.setLocationRelativeTo(null);
         this.setVisible(false);
@@ -145,7 +148,7 @@ public class SegundaInterfaz extends javax.swing.JFrame {
 
     private void MasFrecuentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MasFrecuentesActionPerformed
         // TODO add your handling code here:
-        ResultadosInterfaz resultado = new ResultadosInterfaz();
+        ResultadosInterfaz resultado = new ResultadosInterfaz(tabla, respuesta);
         resultado.setVisible(true);
         resultado.setLocationRelativeTo(null);
         this.setVisible(false);
@@ -153,7 +156,7 @@ public class SegundaInterfaz extends javax.swing.JFrame {
 
     private void ListadoAminoacidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListadoAminoacidosActionPerformed
         // TODO add your handling code here:
-        ResultadosInterfaz resultado = new ResultadosInterfaz();
+        ResultadosInterfaz resultado = new ResultadosInterfaz(tabla, respuesta);
         resultado.setVisible(true);
         resultado.setLocationRelativeTo(null);
         this.setVisible(false);
@@ -161,7 +164,7 @@ public class SegundaInterfaz extends javax.swing.JFrame {
 
     private void MenosFrecuentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenosFrecuentesActionPerformed
         // TODO add your handling code here:
-        ResultadosInterfaz resultado = new ResultadosInterfaz();
+        ResultadosInterfaz resultado = new ResultadosInterfaz(tabla, respuesta);
         resultado.setVisible(true);
         resultado.setLocationRelativeTo(null);
         this.setVisible(false);
@@ -170,7 +173,7 @@ public class SegundaInterfaz extends javax.swing.JFrame {
 
     private void PatronesAlmacenadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatronesAlmacenadosActionPerformed
         // TODO add your handling code here:
-        ResultadosInterfaz resultado = new ResultadosInterfaz();
+        ResultadosInterfaz resultado = new ResultadosInterfaz(tabla, respuesta);
         resultado.setVisible(true);
         resultado.setLocationRelativeTo(null);
         this.setVisible(false);
@@ -206,7 +209,7 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SegundaInterfaz().setVisible(true);
+                new SegundaInterfaz(tabla).setVisible(true);
             }
         });
     }
