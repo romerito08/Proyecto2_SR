@@ -23,6 +23,8 @@ public class Interfaz extends javax.swing.JFrame {
     /**
      * Creates new form Interfaz
      */
+ 
+    HashTable tabla = null;
     public Interfaz() {
         initComponents();
     }
@@ -42,7 +44,6 @@ public class Interfaz extends javax.swing.JFrame {
         label1 = new java.awt.Label();
         SubirArchivo = new java.awt.Button();
         Integrantes1 = new java.awt.Label();
-        label2 = new java.awt.Label();
         label3 = new java.awt.Label();
         label4 = new java.awt.Label();
 
@@ -77,11 +78,6 @@ public class Interfaz extends javax.swing.JFrame {
         Integrantes1.setForeground(new java.awt.Color(255, 255, 255));
         Integrantes1.setText("Integrantes:");
         jPanel1.add(Integrantes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 90, 30));
-
-        label2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        label2.setForeground(new java.awt.Color(255, 255, 255));
-        label2.setText("Antony Cen");
-        jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, -1, -1));
 
         label3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label3.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,11 +116,18 @@ public class Interfaz extends javax.swing.JFrame {
                     while ((line = reader.readLine()) != null){
                         contenido.append(line.trim());
                     }
+                    tabla = new HashTable(Math.round(contenido.length()/3));
                     
-                    for (int i=0; i<contenido.length(); i+=3 ){
-                        int fin = Math.min(i+3, contenido.length());
-                        String bloque = contenido.substring(i, fin);
-                        System.out.println("Bloque de 3: "+ bloque);
+                    for (int i=0; i<contenido.length()-3; i+=3 ){
+                        
+                        String bloque = contenido.substring(i, i+3);
+                        Informacion info = tabla.Buscar(bloque);
+                        if(info == null){
+                            info = new Informacion();
+                            tabla.Agregar(bloque, info);
+                            System.out.println("Bloque de 3: "+ bloque);
+                        }
+                        info.AgregarUbi(i);
                     
                     }
                     
@@ -138,7 +141,7 @@ public class Interfaz extends javax.swing.JFrame {
         SegundaInterfaz SI = new SegundaInterfaz();
         SI.setVisible(true);
         SI.setLocationRelativeTo(null);
-        
+        this.setVisible(false);
         
     }//GEN-LAST:event_SubirArchivoActionPerformed
 
@@ -175,6 +178,7 @@ public class Interfaz extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(() -> {
             new Interfaz().setVisible(true);
+            
         });
     }
 
@@ -185,7 +189,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
-    private java.awt.Label label2;
     private java.awt.Label label3;
     private java.awt.Label label4;
     // End of variables declaration//GEN-END:variables
