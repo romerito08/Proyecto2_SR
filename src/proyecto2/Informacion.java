@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Sofia Romero
  */
 public class Informacion {
-    private int frecuencia;
+    int frecuencia;
     private int[] ubicaciones;
     private int size;
     

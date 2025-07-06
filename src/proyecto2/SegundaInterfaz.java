@@ -1,5 +1,7 @@
 package proyecto2;
 
+import java.util.Arrays;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -16,10 +18,57 @@ public class SegundaInterfaz extends javax.swing.JFrame {
      */
     
     public static HashTable tabla;
+    Aminoacido[] listaAminoacidos = {
+        new Aminoacido("Fenilalanina", new String[]{"TTT", "TTC"}),
+        new Aminoacido("Leucina", new String[]{"TTA", "TTG", "CTT",
+"CTC", "CTA", "CTG"}),
+        new Aminoacido("Isoleucina", new String[]{"ATT", "ATC", "ATA"}),
+        new Aminoacido("Metionina (Inicio)", new String[]{"ATG"}),
+        new Aminoacido("Valina", new String[]{"GTT", "GTC", "GTA", "GTG"}),
+        new Aminoacido("Serina", new String[]{"TCT", "TCC", "TCA",
+"TCG", "AGT", "AGC"}),
+        new Aminoacido("Prolina", new String[]{"CCT", "CCC", "CCA", "CCG"}),
+        new Aminoacido("Treonina", new String[]{"ACT", "ACC", "ACA", "ACG"}),
+        new Aminoacido("Alanina", new String[]{"GCT", "GCC", "GCA", "GCG"}),
+        new Aminoacido("Tirosina", new String[]{"TAT", "TAC"}),
+        new Aminoacido("Histidina", new String[]{"CAT", "CAC"}),
+        new Aminoacido("Glutamina", new String[]{"CAA", "CAG"}),
+        new Aminoacido("Asparagina", new String[]{"AAT", "AAC"}),
+        new Aminoacido("Lisina", new String[]{"AAA", "AAG"}),
+        new Aminoacido("Acido Aspartico", new String[]{"GAT", "GAC"}),
+        new Aminoacido("Acido Glutamico", new String[]{"GAA", "GAG"}),
+        new Aminoacido("Cisteina", new String[]{"TGT", "TGC"}),
+        new Aminoacido("Triptofano", new String[]{"TGG"}),
+        new Aminoacido("Arginina", new String[]{"CGT", "CGC", "CGA",
+"CGG", "AGA", "AGG"}),
+        new Aminoacido("Glicina", new String[]{"GGT", "GGC", "GGA", "GGG"}),
+        new Aminoacido("Parada", new String[]{"TAA", "TAG", "TGA"})
+    };
     public static String respuesta;
     public SegundaInterfaz(HashTable tabla) {
         initComponents();
         this.tabla =tabla;
+        int totalTripletas =0;
+        
+        for (int i = 0; i < listaAminoacidos.length; i++) {
+            totalTripletas += listaAminoacidos[i].tripletas.length;
+        }
+        
+        String[] tripletas = new String[totalTripletas];
+        int index = 0;
+        
+        for(int i=0; i< listaAminoacidos.length; i++){
+            for(int j = 0; j< listaAminoacidos[i].tripletas.length; j++){
+                System.out.println(listaAminoacidos[i].tripletas[j]);
+                tripletas[index]= listaAminoacidos[i].tripletas[j];
+                index++;
+                
+            }
+        }
+        Arrays.sort(tripletas);
+        for(int i=0; i<tripletas.length; i++){
+            usuario.addItem(tripletas[i]);
+        }
     }
 
     /**
@@ -39,8 +88,8 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         MasFrecuentes = new java.awt.Button();
         ReporteColisiones = new java.awt.Button();
         ListadoAminoacidos = new java.awt.Button();
-        textField1 = new java.awt.TextField();
         label2 = new java.awt.Label();
+        usuario = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -113,13 +162,19 @@ public class SegundaInterfaz extends javax.swing.JFrame {
             }
         });
         jPanel1.add(ListadoAminoacidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, -1));
-        jPanel1.add(textField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 110, 20));
 
         label2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label2.setForeground(new java.awt.Color(255, 255, 255));
         label2.setName(""); // NOI18N
         label2.setText("Inserte el patron:");
         jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 110, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 370));
 
@@ -128,8 +183,14 @@ public class SegundaInterfaz extends javax.swing.JFrame {
 
     private void BuscarPatronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarPatronActionPerformed
         // TODO add your handling code here:
+        respuesta = (String) (usuario.getSelectedItem());
         
-        
+        Informacion info = tabla.Buscar(respuesta);
+        if(info == null){
+        respuesta =("No se consiguio");
+        }else{
+        respuesta = Integer.toString(info.getFrecuencia());
+        }
         ResultadosInterfaz resultado = new ResultadosInterfaz(tabla, respuesta);
         resultado.setVisible(true);
         resultado.setLocationRelativeTo(null);
@@ -179,6 +240,10 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_PatronesAlmacenadosActionPerformed
 
+    private void usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -224,6 +289,6 @@ public class SegundaInterfaz extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
     private java.awt.Label label2;
-    private java.awt.TextField textField1;
+    private javax.swing.JComboBox<String> usuario;
     // End of variables declaration//GEN-END:variables
 }
