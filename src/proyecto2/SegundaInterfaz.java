@@ -235,6 +235,9 @@ public class SegundaInterfaz extends javax.swing.JFrame {
 
     private void ListadoAminoacidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListadoAminoacidosActionPerformed
         // TODO add your handling code here:
+        
+        respuesta = tabla.listarTripletasPorAminoacido(listaAminoacidos);
+        
         ResultadosInterfaz resultado = new ResultadosInterfaz(tabla, respuesta);
         resultado.setVisible(true);
         resultado.setLocationRelativeTo(null);

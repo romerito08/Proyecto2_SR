@@ -126,4 +126,29 @@ public class HashTable {
         }
         return printear;
     }
+    
+    public String listarTripletasPorAminoacido(Aminoacido[] listaAminoacidos) {
+        String total = "";
+        for (int i = 0; i < listaAminoacidos.length; i++) {
+            String tripletas = "";
+            Aminoacido aa = listaAminoacidos[i];
+            tripletas += ("Aminoácido: " + aa.nombre);
+
+            for (int j = 0; j < aa.tripletas.length; j++) {
+                String tripleta = aa.tripletas[j];
+                Informacion info = this.Buscar(tripleta);
+
+                if (info != null && info.frecuencia > 0) {
+                    tripletas += ("\nTripleta: " + tripleta + "\nFrecuencia: " + info.frecuencia);
+                }
+            }
+            
+            if (tripletas == "") {
+                tripletas += ("No se encontraron tripletas en la secuencia");
+            }
+            total += tripletas + "\n\n";
+        }
+        return total;
+    }
+
 }
