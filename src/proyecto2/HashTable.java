@@ -81,5 +81,49 @@ public class HashTable {
     return menosFrecuente;
 }
     
+    public String todos() {
+        String muestra = "";
+        for (int i = 0; i < tabla.length; i++) {
+            HashNodo actual = tabla[i];
+            while (actual != null) {
+                muestra += "El patron es: " + actual.clave+ " La frecuencia es: " + actual.info.frecuencia;
+                muestra = muestra + "\nUbicaciones\n";
+                int n = actual.info.getUbicaciones().length;
+                
+                for (int j=0; j< n ; j++){
+                    muestra = muestra + actual.info.getUbicaciones()[j] + ", ";
+                }
+                muestra += "\n \n";
+                actual = actual.next;
+                
+            }
+        }
+
+        return muestra;
+    }
+
+    public String reporteColisiones() {
     
+        String printear = "";
+        
+        for (int i = 0; i < tabla.length; i++) {
+            HashNodo actual = tabla[i];
+            int contador = 0;
+            
+            while (actual != null) {
+                contador++;
+                actual = actual.next;
+            }
+            if (contador > 1) {
+                printear += " Posicion: " + i + " Colisiones: " + contador;
+                actual = tabla[i];
+                while (actual != null) {
+                    printear += "\n- Tripleta: " + actual.clave + " Frecuencia: " + actual.info.frecuencia;
+                    actual = actual.next;
+                }
+                printear += "\n \n";
+            }
+        }
+        return printear;
+    }
 }

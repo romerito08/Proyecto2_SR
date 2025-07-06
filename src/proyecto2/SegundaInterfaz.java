@@ -204,6 +204,8 @@ public class SegundaInterfaz extends javax.swing.JFrame {
     private void ReporteColisionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteColisionesActionPerformed
 
         // TODO add your handling code here:
+        respuesta = tabla.reporteColisiones(); 
+        
         ResultadosInterfaz resultado = new ResultadosInterfaz(tabla, respuesta);
         resultado.setVisible(true);
         resultado.setLocationRelativeTo(null);
@@ -262,6 +264,9 @@ public class SegundaInterfaz extends javax.swing.JFrame {
 
     private void PatronesAlmacenadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatronesAlmacenadosActionPerformed
         // TODO add your handling code here:
+        
+        respuesta = tabla.todos();
+        
         ResultadosInterfaz resultado = new ResultadosInterfaz(tabla, respuesta);
         resultado.setVisible(true);
         resultado.setLocationRelativeTo(null);
