@@ -187,9 +187,13 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         
         Informacion info = tabla.Buscar(respuesta);
         if(info == null){
-        respuesta =("No se consiguio");
+            respuesta =("No se consiguio");
         }else{
-        respuesta = Integer.toString(info.getFrecuencia());
+            respuesta = ("La Frecuencia es: " + Integer.toString(info.getFrecuencia()));
+            respuesta = respuesta + "\nUbicaciones\n";
+            for(int i=0; i<info.getUbicaciones().length; i++){
+                respuesta = respuesta + info.getUbicaciones()[i] + ", ";
+            }
         }
         ResultadosInterfaz resultado = new ResultadosInterfaz(tabla, respuesta);
         resultado.setVisible(true);
