@@ -241,6 +241,18 @@ public class SegundaInterfaz extends javax.swing.JFrame {
 
     private void MenosFrecuentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenosFrecuentesActionPerformed
         // TODO add your handling code here:
+        
+        HashNodo info = tabla.obtenerMenosFrecuente();
+        if(info == null){
+            respuesta =("No se consiguio");
+        }else{
+            respuesta = ("El menos frecuente es: "+ info.clave + " con " + Integer.toString(info.info.getFrecuencia()));
+            respuesta = respuesta + "\nUbicaciones\n";
+            for(int i=0; i<info.info.getUbicaciones().length; i++){
+                respuesta = respuesta + info.info.getUbicaciones()[i] + ", ";
+            }
+        }
+        
         ResultadosInterfaz resultado = new ResultadosInterfaz(tabla, respuesta);
         resultado.setVisible(true);
         resultado.setLocationRelativeTo(null);

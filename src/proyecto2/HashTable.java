@@ -61,7 +61,25 @@ public class HashTable {
 
     return masFrecuente;
 }
+    
+    public HashNodo obtenerMenosFrecuente() {
+    HashNodo menosFrecuente = null;
 
+    for (int i = 0; i < tabla.length; i++) {
+        HashNodo actual = tabla[i];
+        while (actual != null) {
+            if (actual.info.frecuencia > 0) {
+                if (menosFrecuente == null || actual.info.frecuencia <
+                    menosFrecuente.info.frecuencia) {
+                    menosFrecuente = actual;
+                }
+            }
+            actual = actual.next;
+        }
+    }
+
+    return menosFrecuente;
+}
     
     
 }
