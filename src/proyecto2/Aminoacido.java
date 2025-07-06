@@ -12,6 +12,13 @@ public class Aminoacido {
     String nombre;
     String[] tripletas;
     
+    /**
+     * Constructor que crea un objeto Aminoacido con su nombre y las tripletas asociadas.
+     *
+     * @param nombre Nombre del aminoácido.
+     * @param tripletas Tripletas de ADN que lo representan.
+     */
+
     public Aminoacido(String nombre, String[] tripletas){
         this.nombre = nombre;
         this.tripletas = tripletas;

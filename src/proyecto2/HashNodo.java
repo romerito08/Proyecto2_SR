@@ -15,6 +15,12 @@ public class HashNodo{
     Informacion info;
     HashNodo next; 
     
+    /**
+     * Constructor que crea un nodo con su tripleta y su información asociada.
+     * @param clave La tripleta de ADN que se quiere guardar.
+     * @param info El objeto Informacion que contiene los datos del fragmento.
+     */
+
     public HashNodo(String clave, Informacion info){
         this.clave = clave;
         this.info = info;
