@@ -8,20 +8,42 @@ package proyecto2;
  *
  * @author Sofia Romero
  */
+
+/**
+ * Clase que representa una tabla hash simple para almacenar fragmentos de ADN.
+ * Utiliza listas enlazadas para manejar colisiones.
+ */
 public class HashTable {
-    private HashNodo[] tabla;
-    private int size;
+    private HashNodo[] tabla; // Arreglo que almacena los buckets de la tabla
+    private int size;          // Cantidad de posiciones 
+    
+    /**
+     * Constructor de la tabla hash.
+     * @param size Número de posiciones o capacidad inicial de la tabla.
+     */
     
     public HashTable(int size){
         this.size = size;
         tabla = new HashNodo[size];
     }
     
+    /**
+     * Función de dispersión que convierte una clave en una posición dentro del arreglo.
+     * @param clave La cadena que representa el fragmento de ADN.
+     * @return Índice calculado dentro de la tabla.
+     */
     private int hash(String clave){
         return Math.abs(clave.hashCode() % size);
        
     }
     
+        /**
+     * Inserta un nuevo fragmento con su información en la tabla.
+     * Si ya existe un fragmento en esa posición, se inserta al inicio de la lista enlazada.
+     * @param clave Tripleta de ADN que se va a guardar.
+     * @param info Objeto que contiene frecuencia y ubicaciones del fragmento.
+     */
+
     public void Agregar(String clave, Informacion info){
         int opcion = hash(clave);
         HashNodo nuevo = new HashNodo(clave, info);
@@ -30,6 +52,13 @@ public class HashTable {
         tabla[opcion]= nuevo;
         
     }
+    
+    /**
+     * Busca un fragmento (tripleta de ADN) dentro de la tabla hash.
+     *
+     * @param clave La tripleta que se desea buscar.
+     * @return El objeto Informacion asociado a la clave, o null si no se encontró.
+     */
     public Informacion Buscar(String clave){
         int opcion = hash(clave);
         HashNodo actual = tabla[opcion];
@@ -45,6 +74,11 @@ public class HashTable {
         
     }
     
+    /**
+     * Recorre toda la tabla y devuelve el nodo con mayor frecuencia de aparición.
+     *
+     * @return El HashNodo con el fragmento que aparece más veces en la secuencia.
+     */
     public HashNodo obtenerMasFrecuente() {
     HashNodo masFrecuente = null;
 
@@ -61,7 +95,12 @@ public class HashTable {
 
     return masFrecuente;
 }
-    
+    /**
+     * Recorre toda la tabla y devuelve el nodo con menor frecuencia de aparición,
+     * excluyendo los que tienen frecuencia 0.
+     *
+     * @return El HashNodo con el fragmento menos repetido en la secuencia.
+     */
     public HashNodo obtenerMenosFrecuente() {
     HashNodo menosFrecuente = null;
 
@@ -80,7 +119,13 @@ public class HashTable {
 
     return menosFrecuente;
 }
-    
+     /**
+     * Genera un texto con todos los fragmentos almacenados en la tabla hash,
+     * mostrando su frecuencia y las posiciones donde aparecen.
+     *
+     * @return Una cadena con la información completa de cada tripleta.
+     */
+
     public String todos() {
         String muestra = "";
         for (int i = 0; i < tabla.length; i++) {
@@ -101,6 +146,13 @@ public class HashTable {
 
         return muestra;
     }
+
+    /**
+     * Recorre la tabla hash y genera un reporte de colisiones.
+     * Muestra las posiciones donde hay más de un fragmento almacenado en el mismo índice.
+     *
+     * @return Una cadena con los índices colisionados y las tripletas que cayeron ahí.
+     */
 
     public String reporteColisiones() {
     
@@ -127,6 +179,13 @@ public class HashTable {
         return printear;
     }
     
+    /**
+     * Busca todas las tripletas asociadas a cada aminoácido en la lista.
+     * Para cada aminoácido, muestra las tripletas que aparecieron y su frecuencia.
+     *
+     * @param listaAminoacidos Arreglo con objetos de tipo Aminoacido.
+     * @return Una cadena con la información agrupada por aminoácido.
+     */
     public String listarTripletasPorAminoacido(Aminoacido[] listaAminoacidos) {
         String total = "";
         for (int i = 0; i < listaAminoacidos.length; i++) {
