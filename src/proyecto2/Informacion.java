@@ -5,8 +5,6 @@
 package proyecto2;
 
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Sofia Romero
@@ -51,7 +49,7 @@ public class Informacion {
     }
     /**
      * Devuelve un nuevo arreglo con las posiciones registradas
-     * Solo se devuelve hasta el tamaño actual (sin espacios vacíos)
+     * Solo se devuelve hasta el tamaño actual
      * @return Un arreglo de enteros con las ubicaciones válidas
      */
     public int[] getUbicaciones(){

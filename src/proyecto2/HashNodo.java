@@ -17,7 +17,7 @@ public class HashNodo{
     
     /**
      * Constructor que crea un nodo con su tripleta y su información asociada.
-     * @param clave La tripleta de ADN que se quiere guardar.
+     * @param clave La tripleta que se quiere guardar.
      * @param info El objeto Informacion que contiene los datos del fragmento.
      */
 

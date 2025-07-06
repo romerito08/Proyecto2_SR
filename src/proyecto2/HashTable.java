@@ -28,7 +28,7 @@ public class HashTable {
     }
     
     /**
-     * Función de dispersión que convierte una clave en una posición dentro del arreglo.
+     * Función que convierte una clave en una posición dentro del arreglo.
      * @param clave La cadena que representa el fragmento de ADN.
      * @return Índice calculado dentro de la tabla.
      */
@@ -36,7 +36,6 @@ public class HashTable {
         return Math.abs(clave.hashCode() % size);
        
     }
-    
         /**
      * Inserta un nuevo fragmento con su información en la tabla.
      * Si ya existe un fragmento en esa posición, se inserta al inicio de la lista enlazada.
@@ -54,7 +53,7 @@ public class HashTable {
     }
     
     /**
-     * Busca un fragmento (tripleta de ADN) dentro de la tabla hash.
+     * Busca una tripleta dentro de la tabla hash.
      *
      * @param clave La tripleta que se desea buscar.
      * @return El objeto Informacion asociado a la clave, o null si no se encontró.
@@ -121,7 +120,7 @@ public class HashTable {
 }
      /**
      * Genera un texto con todos los fragmentos almacenados en la tabla hash,
-     * mostrando su frecuencia y las posiciones donde aparecen.
+     * mostrando su frecuencia y las posiciones donde aparecen
      *
      * @return Una cadena con la información completa de cada tripleta.
      */

@@ -94,6 +94,17 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    /**
+ * Maneja la accion del botón "Subir Archivo".
+ * 
+ * Este método permite al usuario seleccionar un archivo de texto (.txt) mediante un JFileChooser.
+ * Si el archivo es válido, se lee el contenido, se divide en bloques de tres caracteres,
+ * y se almacena en una tabla hash. Cada bloque se asocia con una instancia
+ * de {@code Informacion}, que registra las ubicaciones donde aparece el bloque.
+ * 
+ * @param evt el evento de acción generado al hacer clic en el botón
+ */
     private void SubirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubirArchivoActionPerformed
         
         JFileChooser fileChooser = new JFileChooser();

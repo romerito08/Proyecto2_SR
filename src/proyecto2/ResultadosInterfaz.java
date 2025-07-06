@@ -9,6 +9,15 @@ package proyecto2;
  *
  * @author Sofia Romero
  */
+
+/**
+ * Clase ResultadosInterfaz extiende JFrame y representa una ventana gráfica
+ * que muestra un resultado recibido y permite regresar a una interfaz anterior.
+ * 
+ * Usa una instancia de HashTable para mostrar datos, y permite la navegación
+ * hacia otra interfaz llamada SegundaInterfaz.
+ */
+
 public class ResultadosInterfaz extends javax.swing.JFrame {
 
     private ResultadosInterfaz ss;
@@ -17,8 +26,21 @@ public class ResultadosInterfaz extends javax.swing.JFrame {
      * Creates new form ResultadosInterfaz
      */
    
+    /** Instancia para manejo de datos en la tabla hash */
     public static HashTable tabla;
+
+    /** Cadena que almacena el resultado que se muestra en pantalla */
     public static String resultado;
+
+    
+    /**
+     * Constructor para la clase ResultadosInterfaz.
+     * Inicializa la ventana con los datos necesarios.
+     * 
+     * @param tabla     instancia de HashTable con la información a procesar
+     * @param resultado texto que se mostrará en el área de resultados
+     */
+
     public ResultadosInterfaz(HashTable tabla, String resultado) {
         initComponents();
         this.tabla= tabla;
@@ -66,7 +88,13 @@ public class ResultadosInterfaz extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+     /**
+     * Maneja el clic en el botón "Regresar".
+     * Oculta esta ventana y muestra la SegundaInterfaz con la tabla actual.
+     * 
+     * @param evt evento de acción del botón
+     */
     private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
         // TODO add your handling code here:
       

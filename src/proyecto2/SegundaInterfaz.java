@@ -17,7 +17,10 @@ public class SegundaInterfaz extends javax.swing.JFrame {
      * Creates new form SegundaInterfaz
      */
     
+    /** Tabla hash que contiene información procesada de tripletas. */
     public static HashTable tabla;
+    
+    /** Lista de aminoácidos con sus respectivas tripletas de codones. */
     Aminoacido[] listaAminoacidos = {
         new Aminoacido("Fenilalanina", new String[]{"TTT", "TTC"}),
         new Aminoacido("Leucina", new String[]{"TTA", "TTG", "CTT",
@@ -44,7 +47,19 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         new Aminoacido("Glicina", new String[]{"GGT", "GGC", "GGA", "GGG"}),
         new Aminoacido("Parada", new String[]{"TAA", "TAG", "TGA"})
     };
+    
+    /** Cadena que almacena la respuesta de la interfaz. */
     public static String respuesta;
+
+    /**
+     * Constructor de {@code SegundaInterfaz}.
+     * 
+     * Inicializa los componentes gráficos, calcula el total de tripletas
+     * a partir de la lista de aminoácidos, las ordena alfabéticamente y las agrega
+     * al componente {@code usuario} como opciones seleccionables.
+     * 
+     * @param tabla instancia de {@code HashTable} con la información genética procesada
+     */
     public SegundaInterfaz(HashTable tabla) {
         initComponents();
         this.tabla =tabla;
@@ -181,6 +196,16 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+    * Maneja la búsqueda de un patrón seleccionado por el usuario.
+    * 
+    * Este método obtiene la tripleta seleccionada desde el componente {@code usuario},
+    * busca su información en la tabla hash, y genera una respuesta con la frecuencia
+    * y ubicaciones del patrón si existe. Luego, muestra una nueva interfaz con los resultados.
+    * 
+    * @param evt el evento de acción generado al hacer clic en el botón de búsqueda
+    */
+    
     private void BuscarPatronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarPatronActionPerformed
         // TODO add your handling code here:
         respuesta = (String) (usuario.getSelectedItem());
@@ -201,6 +226,15 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_BuscarPatronActionPerformed
 
+    /**
+    * Manejo de acción para generar un reporte de colisiones en la tabla hash.
+    * 
+    * Este método invoca el método {@code reporteColisiones()} de la instancia {@code tabla},
+    * que devuelve un resumen de las colisiones ocurridas durante el almacenamiento de datos.
+    * Luego, muestra una nueva interfaz con los resultados obtenidos.
+    * 
+    * @param evt el evento de acción generado al hacer clic en el botón de reporte
+    */ 
     private void ReporteColisionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteColisionesActionPerformed
 
         // TODO add your handling code here:
@@ -212,6 +246,17 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         this.setVisible(false);
         
     }//GEN-LAST:event_ReporteColisionesActionPerformed
+
+    /**
+    * Maneja para mostrar el patrón más frecuente en la tabla hash.
+    * 
+    * Este método invoca {@code obtenerMasFrecuente()} sobre la instancia {@code tabla},
+    * que devuelve el nodo con mayor frecuencia de aparición. Si se encuentra un patrón,
+    * se construye una respuesta con su clave, frecuencia y ubicaciones. Luego se muestra
+    * una nueva interfaz con los resultados.
+    * 
+    * @param evt el evento de acción generado al hacer clic en el botón correspondiente
+    */
 
     private void MasFrecuentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MasFrecuentesActionPerformed
         // TODO add your handling code here:
@@ -233,6 +278,16 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_MasFrecuentesActionPerformed
 
+    /**
+    * Maneja la acción para generar un listado de tripletas agrupadas por aminoácido.
+    * 
+    * Este método utiliza la función {@code listarTripletasPorAminoacido()} de la tabla hash,
+    * pasando como parámetro el arreglo {@code listaAminoacidos}. El resultado es una cadena
+    * que agrupa las tripletas por cada aminoácido. Luego se muestra en una nueva interfaz.
+    * 
+    * @param evt el evento de acción generado al hacer clic en el botón correspondiente
+    */
+
     private void ListadoAminoacidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListadoAminoacidosActionPerformed
         // TODO add your handling code here:
         
@@ -244,6 +299,16 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_ListadoAminoacidosActionPerformed
 
+    /**
+    * Maneja el evento para mostrar el patrón menos frecuente en la tabla hash.
+    * 
+    * Este método invoca {@code obtenerMenosFrecuente()} sobre la instancia {@code tabla},
+    * que devuelve el nodo con menor frecuencia de aparición. Si se encuentra un patrón,
+    * se construye una respuesta con su clave, frecuencia y ubicaciones. Luego se muestra
+    * una nueva interfaz con los resultados y se oculta la actual.
+    * 
+    * @param evt el evento de acción generado al hacer clic en el botón correspondiente
+    */
     private void MenosFrecuentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenosFrecuentesActionPerformed
         // TODO add your handling code here:
         
@@ -264,6 +329,16 @@ public class SegundaInterfaz extends javax.swing.JFrame {
         this.setVisible(false);
         
     }//GEN-LAST:event_MenosFrecuentesActionPerformed
+
+    /**
+    * Muestra todos los patrones almacenados en la tabla hash.
+    * 
+    * Este método invoca {@code tabla.todos()} para obtener una representación textual
+    * de todos los patrones registrados. Luego, crea una nueva instancia de {@code ResultadosInterfaz}
+    * para mostrar dicha información al usuario, ocultando la interfaz actual.
+    * 
+    * @param evt el evento de acción generado al hacer clic en el botón correspondiente
+    */
 
     private void PatronesAlmacenadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatronesAlmacenadosActionPerformed
         // TODO add your handling code here:

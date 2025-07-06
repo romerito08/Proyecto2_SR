@@ -13,6 +13,15 @@ public class Proyecto2 {
     /**
      * @param args the command line arguments
      */
+    
+    /**
+    *Entrada de la aplicación.
+    * 
+    * Este método crea una instancia de la clase {@code Interfaz}, 
+    * la hace visible y la posiciona en el centro de la pantalla.
+    * 
+    * @param args argumentos de línea de comandos
+    */
     public static void main(String[] args) {
         
         Interfaz ll = new Interfaz();
