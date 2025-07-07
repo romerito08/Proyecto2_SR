@@ -1,6 +1,6 @@
 package proyecto2;
 
-import java.util.Arrays;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -80,7 +80,17 @@ public class SegundaInterfaz extends javax.swing.JFrame {
                 
             }
         }
-        Arrays.sort(tripletas);
+        
+        for (int i = 0; i < tripletas.length - 1; i++) {
+            for (int j = 0; j < tripletas.length - i - 1; j++) {
+                if (tripletas[j].compareTo(tripletas[j + 1]) > 0) {
+                    String temp = tripletas[j];
+                    tripletas[j] = tripletas[j + 1];
+                    tripletas[j + 1] = temp;
+                }
+            }
+        }
+        
         for(int i=0; i<tripletas.length; i++){
             usuario.addItem(tripletas[i]);
         }
