@@ -106,54 +106,63 @@ public class Interfaz extends javax.swing.JFrame {
  * @param evt el evento de acción generado al hacer clic en el botón
  */
     private void SubirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubirArchivoActionPerformed
-        
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        int respuesta = fileChooser.showOpenDialog(this);
-        
-        if(respuesta == JFileChooser.APPROVE_OPTION){
-            java.io.File archivoSeleccionado = fileChooser.getSelectedFile();
-            
-            if (archivoSeleccionado.getName().toLowerCase().endsWith(".txt")) {
-               JOptionPane.showMessageDialog(this, "Archivo TXT seleccionado: " + archivoSeleccionado.getAbsolutePath(), "Archivo Seleccionado", JOptionPane.INFORMATION_MESSAGE);
-                
-            }
-             try (BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(archivoSeleccionado), StandardCharsets.UTF_8))
-                ){
-                    StringBuilder contenido = new StringBuilder();
-                    String line;
+        try {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            int respuesta = fileChooser.showOpenDialog(this);
 
-                    while ((line = reader.readLine()) != null){
-                        contenido.append(line.trim());
-                    }
-                    tabla = new HashTable(Math.round(contenido.length()/3));
-                    
-                    for (int i=0; i<contenido.length()-3; i+=3 ){
-                        
-                        String bloque = contenido.substring(i, i+3);
-                        Informacion info = tabla.Buscar(bloque);
-                        if(info == null){
-                            info = new Informacion();
-                            tabla.Agregar(bloque, info);
-                            System.out.println("Bloque de 3: "+ bloque);
+            if(respuesta == JFileChooser.APPROVE_OPTION){
+                java.io.File archivoSeleccionado = fileChooser.getSelectedFile();
+
+                if (archivoSeleccionado.getName().toLowerCase().endsWith(".txt")) {
+                   JOptionPane.showMessageDialog(this, "Archivo TXT seleccionado: " + archivoSeleccionado.getAbsolutePath(), "Archivo Seleccionado", JOptionPane.INFORMATION_MESSAGE);
+
+                }
+                 try (BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(new FileInputStream(archivoSeleccionado), StandardCharsets.UTF_8))
+                    ){
+                        StringBuilder contenido = new StringBuilder();
+                        String line;
+
+                        while ((line = reader.readLine()) != null){
+                            contenido.append(line.trim());
                         }
-                        info.AgregarUbi(i);
-                    
-                    }
-                    
-                    
-             } catch (IOException ex) {
-                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+
+                        String secuencia = contenido.toString().toUpperCase();
+                        if (!secuencia.matches("[ATCG]+")) {
+                            JOptionPane.showMessageDialog(this, "El archivo contiene caracteres inválidos. Solo se permiten A, T, C y G.", "Error en secuencia", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+
+                        tabla = new HashTable(Math.round(contenido.length()/3));
+                        for (int i = 0; i <= secuencia.length() - 3; i += 3){
+
+                            String bloque = contenido.substring(i, i+3);
+                            Informacion info = tabla.Buscar(bloque);
+                            if(info == null){
+                                info = new Informacion();
+                                tabla.Agregar(bloque, info);
+                                System.out.println("Bloque de 3: "+ bloque);
+                            }
+                            info.AgregarUbi(i);
+
+                        }
+
+
+                 } catch (IOException ex) {
+                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
-            
+
+            SegundaInterfaz SI = new SegundaInterfaz(tabla);
+            SI.setVisible(true);
+            SI.setLocationRelativeTo(null);
+            this.setVisible(false);
+        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Se produjo un error inesperado:\n" + e.getMessage(), "Error general", JOptionPane.ERROR_MESSAGE);
         }
-        
-        SegundaInterfaz SI = new SegundaInterfaz(tabla);
-        SI.setVisible(true);
-        SI.setLocationRelativeTo(null);
-        this.setVisible(false);
-        
     }//GEN-LAST:event_SubirArchivoActionPerformed
 
     /**
